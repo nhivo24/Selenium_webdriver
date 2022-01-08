@@ -95,7 +95,7 @@ public class Topic_02_Xpath_Css {
 		driver.get("https://alada.vn/tai-khoan/dang-ky.html");
 		driver.findElement(By.id("txtFirstname")).sendKeys("vo nhi");
 		driver.findElement(By.id("txtEmail")).sendKeys("vothinhi@gmail.com");
-		driver.findElement(By.id("txtCEmail")).sendKeys("vothinhi2410@gmail.com");
+		driver.findElement(By.id("txtCEmail")).sendKeys("vothinhi@gmail.com");
 		driver.findElement(By.id("txtPassword")).sendKeys("123");
 		driver.findElement(By.id("txtCPassword")).sendKeys("123");
 		driver.findElement(By.id("txtPhone")).sendKeys("0123456789");
@@ -105,7 +105,6 @@ public class Topic_02_Xpath_Css {
 		//kiểm tra dữ liệu trả về đúng/sai
 		//Assert.assertFalse(false);
 		//Assert.assertTrue(true);
-		
 		//Verify error message as expected
 		Assert.assertEquals(driver.findElement(By.id("txtPassword-error")).getText(), "Mật khẩu phải có ít nhất 6 ký tự");
 		Assert.assertEquals(driver.findElement(By.id("txtCPassword-error")).getText(), "Mật khẩu phải có ít nhất 6 ký tự");
@@ -114,11 +113,41 @@ public class Topic_02_Xpath_Css {
 	@Test
 	public void TC_05_Register_Incorrect_Password() {
 		driver.get("https://alada.vn/tai-khoan/dang-ky.html");
+		driver.findElement(By.id("txtFirstname")).sendKeys("vo nhi");
+		driver.findElement(By.id("txtEmail")).sendKeys("vothinhi@gmail.com");
+		driver.findElement(By.id("txtCEmail")).sendKeys("vothinhi@gmail.com");
+		driver.findElement(By.id("txtPassword")).sendKeys("123456");
+		driver.findElement(By.id("txtCPassword")).sendKeys("1234567");
+		driver.findElement(By.id("txtPhone")).sendKeys("0123456789");
+		driver.findElement(By.xpath("//form[@id='frmLogin']//button[text()='ĐĂNG KÝ'] ")).click();
+		sleepInSecond(2);
+		
+		//kiểm tra dữ liệu trả về đúng/sai
+		//Assert.assertFalse(false);
+		//Assert.assertTrue(true);
+		//Verify error message as expected
+		Assert.assertEquals(driver.findElement(By.id("txtCPassword-error")).getText(), "Mật khẩu bạn nhập không khớp");
+		
 	}
 
 	@Test
 	public void TC_06_Register_Invalid_Phone() {
 		driver.get("https://alada.vn/tai-khoan/dang-ky.html");
+		driver.findElement(By.id("txtFirstname")).sendKeys("vo nhi");
+		driver.findElement(By.id("txtEmail")).sendKeys("vothinhi@gmail.com");
+		driver.findElement(By.id("txtCEmail")).sendKeys("vothinhi@gmail.com");
+		driver.findElement(By.id("txtPassword")).sendKeys("123456");
+		driver.findElement(By.id("txtCPassword")).sendKeys("123456");
+		driver.findElement(By.id("txtPhone")).sendKeys("023456789");
+		driver.findElement(By.xpath("//form[@id='frmLogin']//button[text()='ĐĂNG KÝ'] ")).click();
+		sleepInSecond(2);
+		
+		//kiểm tra dữ liệu trả về đúng/sai
+		//Assert.assertFalse(false);
+		//Assert.assertTrue(true);
+		//Verify error message as expected
+		Assert.assertEquals(driver.findElement(By.id("txtPhone-error")).getText(), "Số điện thoại bắt đầu bằng: 09 - 03 - 012 - 016 - 018 - 019"
+				+ "");
 	}
 	
 	@AfterClass
